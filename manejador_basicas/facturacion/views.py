@@ -28,7 +28,7 @@ def servicio_create(request):
         'form': form,
     }
 
-    return render(request, 'servicioCreate.html', context)
+    return render(request, 'crearServicio.html', context)
 
 def home(request):
     # Aquí puedes colocar el código que deseas ejecutar cuando se visite la página de inicio
