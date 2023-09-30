@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado de la Consulta</title>
+</head>
+<body>
+    <h1>Resultado de la Consulta</h1>
+    <p>El ID de la factura es: {{ resultado.id_factura }}</p>
+    
+    <h2>Elementos de la factura:</h2>
+    <ul>
+        {% for servicio, precio in resultado.servicios_y_precios %}
+            <li>{{ servicio }} - {{ precio }}</li>
+            {% endfor %}
+        </ul>
+        <li>Precio total: {{ resultado.precio_total }}</li>
+    
+    <!-- Puedes mostrar otros detalles relacionados con la factura aquí -->
+</body>
+</html>
+
