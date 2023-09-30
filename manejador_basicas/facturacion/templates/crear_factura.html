@@ -1,0 +1,15 @@
+<!-- formulario_creacion.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Objeto</title>
+</head>
+<body>
+    <h1>Generar una nueva factura</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Consultar</button>
+    </form>
+</body>
+</html>

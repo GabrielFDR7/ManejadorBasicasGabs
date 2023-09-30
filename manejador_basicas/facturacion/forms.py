@@ -1,16 +1,10 @@
 from django import forms
-from .models import Contrato, Servicio, Factura
+from .models import Factura
 
-
-class ServicioForm(forms.ModelForm):
+class FacturaForm(forms.ModelForm):
     class Meta:
-        model = Servicio
-        fields = [
-            'nombre_servicio',
-            'descripcion'
-        ]
-
+        model = Factura
+        fields = ['nombre_factura']
         labels = {
-            'nombre_servicio' : 'Nombre_servicio',
-            'descripcion': 'Descripcion'
+            'nombre_factura': 'ID Paciente'
         }
