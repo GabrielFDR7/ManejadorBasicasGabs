@@ -1,26 +1,33 @@
 from django.shortcuts import render
 from django.contrib import messages
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
-from .forms import FacturaForm
+from facturacion.models import Paciente, EstadoCuenta, Servicio, Manual_Tarifario, Contrato
 
-pacientes = {'1010248723' : [('Tomografía', 10000), ('Radiografia', 150000)]} 
 
-def crear_factura(request):
-    if request.method == 'POST':
-        form = FacturaForm(request.POST)
-        if form.is_valid():
-            nuevo_Factura = form.save()
-            generar_factura(nuevo_Factura)
-            return render(request, 'facturacion/templates/resultado_consulta.html', {'resultado': nuevo_Factura})
-    else:
-        form = FacturaForm()
+def crear_factura(request, id_paciente):
+    try:
+        paciente = Paciente.objects.get(id=id_paciente)
+        servicios = EstadoCuenta.objects.filter(id_paciente=paciente).values('id_servicio')
 
-    return render(request, 'crear_factura.html', {'form': form})
+        factura = []
 
-def generar_factura(factura):
+        precio_total = 0
 
-    for servicio in pacientes[(factura.id_factura)]:
-        factura.servicios_y_precios.append([servicio[0], servicio[1]])
-        factura.precio_total += servicio[1]
+        for servicio in servicios:
+            manual_tarifario = Manual_Tarifario.objects.get(id_servicio=servicio['id_servicio'], id_contrato=paciente.id_contrato)
+            servicio = Servicio.objects.get(id=servicio['id_servicio'])
+
+            precio = manual_tarifario.precio
+            factura.append((servicio, precio))
+            precio_total += precio
+
+        return JsonResponse({'precios_servicios': factura}, {'precio_total': precio_total})
+
+    except Paciente.DoesNotExist:
+        return JsonResponse({'error': 'Paciente no encontrado'}, status=404)
+
+
+
+    
     
