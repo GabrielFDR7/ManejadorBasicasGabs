@@ -11,10 +11,10 @@ from django.core.exceptions import ObjectDoesNotExist
 
 def crear_factura(request):
     if request.method == 'GET':
-        cedula_paciente = request.GET.get('id_paciente')
-        
+        cedula_paciente = request.GET.get('cedula_paciente').strip()
+
         try:
-            paciente = Paciente.objects.get(id=cedula_paciente)
+            paciente = Paciente.objects.get(id__iexact=cedula_paciente)
             servicios = EstadoCuenta.objects.filter(id_paciente=paciente).values('id_servicio')
 
             factura = []
@@ -25,21 +25,21 @@ def crear_factura(request):
                 servicio = Servicio.objects.get(id=servicio['id_servicio'])
 
                 precio = manual_tarifario.precio
-                factura.append((servicio, precio))
+                factura.append((servicio.descripcion, precio))
                 precio_total += precio
 
             return render(request, 'resultado_consulta.html', {
-                'resultado': {
-                    'id_factura': paciente.id,  # Aquí puedes modificar el dato que deseas mostrar
-                    'servicios_y_precios': factura,
-                    'precio_total': precio_total
-                }
+                'id_factura': paciente.id,  # ID del paciente
+                'servicios_y_precios': factura,
+                'precio_total': precio_total  # Precio total
             })
 
         except ObjectDoesNotExist:
             return render(request, 'resultado_consulta.html', {'error': 'Paciente no encontrado'})
 
-    return HttpResponse("Algo salió mal") 
+    return HttpResponse("Algo salió mal")
+
+
 
 def lista_pacientes(request):
     pacientes = Paciente.objects.all()
