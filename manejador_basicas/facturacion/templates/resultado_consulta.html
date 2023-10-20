@@ -11,11 +11,9 @@
     <ul>
         {% for servicio, precio in resultado.servicios_y_precios %}
             <li>{{ servicio }} - {{ precio }}</li>
-            {% endfor %}
-        </ul>
-        <li>Precio total: {{ resultado.precio_total }}</li>
+        {% endfor %}
+    </ul>
     
-    <!-- Puedes mostrar otros detalles relacionados con la factura aquí -->
+    <p>Precio Total: {{ resultado.precio_total }}</p>
 </body>
 </html>
-
