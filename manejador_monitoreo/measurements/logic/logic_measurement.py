@@ -9,9 +9,10 @@ def create_measurement(form):
     measurement.save()
     return ()
 
-def create_measurement_object(variable_id, value, unit, place):
+def create_measurement_object(id, value, variable):
     measurement = Measurement()
-    measurement.variable = variable_id
+    measurement.id = id
     measurement.value = value
+    measurement.variable = variable
     measurement.save()
     return ()
