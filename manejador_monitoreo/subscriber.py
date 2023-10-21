@@ -39,8 +39,7 @@ def callback(ch, method, properties, body):
     payload = json.loads(body.decode('utf8').replace("'", '"'))
     topic = method.routing_key  # No se requiere split en este caso
     variable = get_variable(topic)  # Accede directamente a la variable
-    create_measurement_object(
-        variable, payload['value'], payload['unit'], topic)
+    create_measurement_object(variable, payload['value'], payload['unit'])
     if variable.name == 'Heart-rate':
         check_alarm(payload['value'])
     print("Measurement :%r" % (str(payload)))
