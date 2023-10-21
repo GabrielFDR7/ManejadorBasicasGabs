@@ -6,11 +6,11 @@ def get_variables():
     return (queryset)
 
 
-def create_variable(form):
-    measurement = form.save()
-    measurement.save()
-    return ()
-
+def create_variable(name):
+    variable, created = Variable.objects.get_or_create(name=name)
+    if created:
+        variable.save()
+    return variable
 
 def get_variable_by_name(name):
     try:
