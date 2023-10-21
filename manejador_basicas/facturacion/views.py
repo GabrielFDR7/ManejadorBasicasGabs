@@ -37,8 +37,6 @@ def crear_factura(request):
         except ObjectDoesNotExist:
              raise Http404("El paciente no existe")
 
-    return HttpResponse("Algo salió mal",safe=False)
-
 
 
 def lista_pacientes(request):
