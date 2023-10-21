@@ -3,8 +3,6 @@ import pika
 from sys import path
 from os import environ
 import django
-from ManejadorBasicas.manejador_monitoreo.variables.forms import VariableForm
-from ManejadorBasicas.manejador_monitoreo.variables.logic.variable_logic import create_variable
 
 rabbit_host = '10.128.0.15'
 rabbit_user = 'rasi-db'
@@ -41,22 +39,11 @@ def callback(ch, method, properties, body):
     payload = json.loads(body.decode('utf8').replace("'", '"'))
     topic = method.routing_key  # No se requiere split en este caso
     variable = get_variable(topic)  # Accede directamente a la variable
-
-    # Verifica si la variable es None (no se encontró por nombre), en cuyo caso deberías crearla
-    if variable is None:
-        variable = create_variable(name=topic)  # Puedes ajustar esto según tus campos de Variable
-        # También puedes pasar otros campos necesarios al crear la variable
-
-    # Asegúrate de que VariableForm tenga los campos y valores adecuados
-    variable_form = VariableForm({'name': variable.name, 'description': variable.description, 'unit': variable.unit})
-    create_variable(variable_form)
-
     create_measurement_object(
         variable, payload['value'], payload['unit'], topic)
     if variable.name == 'Heart-rate':
         check_alarm(payload['value'])
     print("Measurement :%r" % (str(payload)))
-
 
 
 channel.basic_consume(
