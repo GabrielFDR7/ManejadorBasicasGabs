@@ -35,7 +35,7 @@ def crear_factura(request):
             })
 
         except ObjectDoesNotExist:
-            return render(request, 'resultado_consulta.html', {'error': 'Paciente no encontrado'})
+            return JsonResponse({"El paciente no existe"})
 
     return HttpResponse("Algo salió mal")
 
