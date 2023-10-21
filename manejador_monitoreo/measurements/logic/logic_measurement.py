@@ -10,6 +10,6 @@ def create_measurement(form):
     return ()
 
 def create_measurement_object(variable, value, unit):
-    measurement = Measurement(variable=variable, value=value, unit=unit)
+    measurement = Measurement(variable=variable, value=value)
     measurement.save()
     return measurement
