@@ -4,11 +4,11 @@ from sys import path
 from os import environ
 import django
 
-rabbit_host = '34.71.50.69'
+rabbit_host = '10.128.0.15'
 rabbit_user = 'rasi-db'
 rabbit_password = 'rasi2023'
 exchange = 'monitoring_measurements'
-topics = ['15.#']
+topics = ['Patient.monitoring.#']
 
 
 path.append('monitoring/settings.py')
@@ -41,7 +41,7 @@ def callback(ch, method, properties, body):
     variable = get_variable(topic[2])
     create_measurement_object(
         variable, payload['value'], payload['unit'], topic[0] + topic[1])
-    if variable.name == 'Temperature':
+    if variable.name == 'Heart-rate':
         check_alarm(payload['value'])
     print("Measurement :%r" % (str(payload)))
 
