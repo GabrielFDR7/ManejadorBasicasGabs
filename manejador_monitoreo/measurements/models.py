@@ -6,7 +6,7 @@ class Measurement(models.Model):
     id = models.AutoField(primary_key=True)
 
     # Valor del ritmo cardíaco
-    heart_rate = models.DecimalField(max_digits=5, decimal_places=2)
+    value = models.DecimalField(max_digits=5, decimal_places=2)
 
     # Fecha y hora de la medida
     timestamp = models.DateTimeField(auto_now_add=True)
