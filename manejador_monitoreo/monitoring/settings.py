@@ -67,7 +67,7 @@ WSGI_APPLICATION = 'monitoring.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'rasi-medical-db',
+        'NAME': 'rasi-db',
         'USER': 'rasi-db',
         'PASSWORD': 'rasi2023',
         'HOST': '10.110.16.3',
