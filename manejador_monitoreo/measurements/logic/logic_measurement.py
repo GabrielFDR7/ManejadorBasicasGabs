@@ -1,10 +1,12 @@
 from ..models import Measurement
 
-def get_measurements():
-    queryset = Measurement.objects.all().order_by('-dateTime')[:10]
-    return (queryset)
-
-def create_measurement(form):
-    measurement = form.save()
+def create_measurement(value, variable):
+    # Crea una nueva instancia de Measurement y la guarda en la base de datos
+    measurement = Measurement(value=value, variable=variable)
     measurement.save()
-    return ()
+    return measurement
+
+def get_latest_measurements(limit=10):
+    # Obtiene las últimas mediciones
+    measurements = Measurement.objects.order_by('-timestamp')[:limit]
+    return measurements
