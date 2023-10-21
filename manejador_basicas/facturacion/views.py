@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import Http404, HttpResponse, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from facturacion.models.Paciente import Paciente
 from facturacion.models.EstadoCuenta import EstadoCuenta
@@ -35,7 +35,7 @@ def crear_factura(request):
             })
 
         except ObjectDoesNotExist:
-            return JsonResponse({"Respuesta":"El paciente no existe"})
+             raise Http404("El paciente no existe")
 
     return HttpResponse("Algo salió mal",safe=False)
 
