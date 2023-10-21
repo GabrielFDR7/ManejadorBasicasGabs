@@ -6,4 +6,3 @@ from facturacion.models.Servicio import Servicio
 class EstadoCuenta(models.Model):
     paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
     servicio = models.OneToOneField(Servicio, on_delete=models.CASCADE)
-
