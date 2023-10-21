@@ -36,23 +36,14 @@ print('> Waiting measurements. To exit press CTRL+C')
 
 
 def callback(ch, method, properties, body):
-    variable = None  
     payload = json.loads(body.decode('utf8').replace("'", '"'))
-    topic = method.routing_key.split('.')
-    
-    try:
-        variable = get_variable(topic[2])
-    except Exception as e:
-        print(f"Error al obtener la variable: {e}")
-    
-    if variable is not None:
-        create_measurement_object(
-            variable, payload['value'], payload['unit'], topic[0] + topic[1])
-        if variable.name == 'heart-rate':
-            check_alarm(payload['value'])
-        print("Measurement :%r" % (str(payload)))
-    else:
-        print("No se pudo obtener la variable, no se realizó la creación de la medición.")
+    topic = method.routing_key  # No se requiere split en este caso
+    variable = get_variable(topic)  # Accede directamente a la variable
+    create_measurement_object(
+        variable, payload['value'], payload['unit'], topic)
+    if variable.name == 'Heart-rate':
+        check_alarm(payload['value'])
+    print("Measurement :%r" % (str(payload)))
 
 
 channel.basic_consume(
