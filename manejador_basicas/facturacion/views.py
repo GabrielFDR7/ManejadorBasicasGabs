@@ -35,9 +35,9 @@ def crear_factura(request):
             })
 
         except ObjectDoesNotExist:
-            return JsonResponse({"El paciente no existe"})
+            return JsonResponse({"Respuesta":"El paciente no existe"})
 
-    return HttpResponse("Algo salió mal")
+    return HttpResponse("Algo salió mal",safe=False)
 
 
 
