@@ -4,5 +4,5 @@ from facturacion.models.Servicio import Servicio
 
 ###Tabla Estado de Cuenta
 class EstadoCuenta(models.Model):
-    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE)
-    servicio = models.OneToOneField(Servicio, on_delete=models.CASCADE)
+    paciente = models.ForeignKey(Paciente, on_delete=models.CASCADE, default='Vacio')
+    servicio = models.OneToOneField(Servicio, on_delete=models.CASCADE, default='Vacio')

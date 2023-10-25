@@ -26,8 +26,7 @@ SECRET_KEY = 'django-insecure-zdz#(^eef$^&v)5qq80$-2%x(aed6!s*4)&$m%b_8sz=peq%*-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -77,11 +76,14 @@ WSGI_APPLICATION = 'manejador_basicas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rasi-db',
+        'USER': 'rasi-db',
+        'PASSWORD': 'rasi2023',
+        'HOST': '10.110.16.3',
+        'PORT': '',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
