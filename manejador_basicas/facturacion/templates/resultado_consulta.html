@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resultado de la Consulta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        p.total {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Resultado de la Consulta</h1>
+    <p>ID de la factura: {{ id_factura }}</p>
+    
+    <h2>Elementos de la factura:</h2>
+    <ul>
+        {% for servicio, precio in servicios_y_precios %}
+            <li>{{ servicio }} - {{ precio }}</li>
+        {% endfor %}
+    </ul>
+    
+    <p class="total">Precio Total: {{ precio_total }}</p>
+</body>
+</html>
