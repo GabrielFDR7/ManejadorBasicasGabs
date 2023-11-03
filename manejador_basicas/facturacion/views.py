@@ -15,14 +15,14 @@ def crear_factura(request):
 
         try:
             paciente = Paciente.objects.get(id__iexact=cedula_paciente)
-            servicios = EstadoCuenta.objects.filter(id_paciente=paciente).values('id_servicio')
+            servicios = EstadoCuenta.objects.filter(id_paciente=paciente).values('servicio')
 
             factura = []
             precio_total = 0
 
             for servicio in servicios:
-                manual_tarifario = Manual_Tarifario.objects.get(id_servicio=servicio['id_servicio'], id_contrato=paciente.id_contrato)
-                servicio = Servicio.objects.get(id=servicio['id_servicio'])
+                manual_tarifario = Manual_Tarifario.objects.get(id_servicio=servicio['servicio'], id_contrato=paciente.id_contrato)
+                servicio = Servicio.objects.get(id=servicio['servicio'])
 
                 precio = manual_tarifario.precio
                 factura.append((servicio.descripcion, precio))

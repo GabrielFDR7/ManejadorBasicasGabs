@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'manejador_basicas.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'rasi-db',
         'USER': 'rasi-db',
         'PASSWORD': 'rasi2023',
@@ -84,7 +84,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
