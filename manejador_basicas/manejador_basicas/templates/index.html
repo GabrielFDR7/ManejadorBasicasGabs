@@ -3,8 +3,18 @@
 <head>
     <title>Manejador de Facturación</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+
         .container {
             text-align: center;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .title {
@@ -18,34 +28,54 @@
             align-items: center;
         }
 
-        .button-container a {
-            margin-bottom: 10px; /* Espacio entre los botones */
-        }
-
         .btn {
             display: inline-block;
             padding: 10px 20px;
-            background-color: #007bff; /* Color de fondo */
-            color: #fff; /* Color del texto */
+            background-color: #007bff;
+            color: #fff;
             border: none;
             border-radius: 5px;
             text-decoration: none;
             cursor: pointer;
             font-size: 18px;
+            margin: 10px 0; /* Espacio entre los botones */
         }
 
         .btn:hover {
-            background-color: #0056b3; /* Color de fondo al pasar el ratón */
+            background-color: #0056b3;
         }
+
+        #formulario-crear-factura {
+            display: none;
+        }
+
+        form {
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="title">Manejador de Facturación </div>
+        <div class="title">Manejador de Facturación</div>
         <div class="button-container">
             <a href="#" id="crear-factura-btn" class="btn">Crear Factura</a>
 
-            <div id="formulario-crear-factura" style="display: none;">
+            <div id="formulario-crear-factura">
                 <h2>Generar Factura</h2>
                 <form action="{% url 'crear_factura' %}" method="get">
                     {% csrf_token %}
