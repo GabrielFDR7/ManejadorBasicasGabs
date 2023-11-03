@@ -28,10 +28,7 @@ def crear_factura(request):
                 factura.append((servicio.descripcion, precio))
                 precio_total += precio
 
-            nombre_paciente = paciente.nombre
-
             return render(request, 'resultado_consulta.html', {
-                'nombre_paciente': nombre_paciente,
                 'id_factura': paciente.id,  # ID del paciente
                 'servicios_y_precios': factura,
                 'precio_total': precio_total  # Precio total
