@@ -29,6 +29,7 @@ def crear_factura(request):
                 precio_total += precio
 
             return render(request, 'resultado_consulta.html', {
+                'nombre_paciente': paciente.nombre,
                 'id_factura': paciente.id,  # ID del paciente
                 'servicios_y_precios': factura,
                 'precio_total': precio_total  # Precio total
