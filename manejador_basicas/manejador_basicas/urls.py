@@ -20,5 +20,5 @@ from . import views
 
 urlpatterns = [
     path('', views.index),
-    path('', include('facturacion.urls'))
+    path('/facturacion/', include('facturacion.urls'))
 ]
