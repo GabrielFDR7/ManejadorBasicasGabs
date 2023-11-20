@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'rasi-db',
         'USER': 'rasi-db',
         'PASSWORD': 'rasi2023',
-        'HOST': '10.110.16.3',
+        'HOST': '10.74.48.3',
         'PORT': '',
     }
 }
